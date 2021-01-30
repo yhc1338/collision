@@ -1,17 +1,28 @@
 clc
 clear
-dt=0.1;
-ball(1)=create(1,[0;0],[2;0]);
-ball(2)=create(1,[4;1.2],[0;0]);
-ball(3)=create(1,[4;-1.2],[0;0]);
-ball(4)=create(1,[6.5;0],[0;0]);
-ball(5)=create(1,[6.5;2.4],[0;0]);
-ball(6)=create(1,[6.5;-2.4],[0;0]);
+r=1;
+global border
+border=[-10 10 -10 10];
+dt=0.01;
+draw=0;
+ball(1)=create(r,[0;0],[80;-10]);
+ball(2)=create(r,[4;1.2],[0;0]);
+ball(3)=create(r,[4;-1.2],[0;0]);
+ball(4)=create(r,[6.5;0],[0;0]);
+ball(5)=create(r,[6.5;2.4],[0;0]);
+ball(6)=create(r,[6.5;-2.4],[0;0]);
 
 while(1)
     ball=move(ball,dt);
-    [ball,~]=collision(ball);
+    [ball,p]=collision(ball,dt);
     plotball(ball)
-    drawnow
-    pause(0.001)
+%     if draw==1
+%         draw=0;
+        drawnow
+        pause(0.001)
+%     end
+    if p==0
+        break
+    end
+%     draw=draw+1;
 end
